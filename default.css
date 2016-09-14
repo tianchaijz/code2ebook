@@ -1,6 +1,16 @@
 body {
     text-align: left;
     text-align-last: left;
+    -webkit-font-smoothing:subpixel-antialiased !important;font-family:'PingFang SC'
+}
+
+a {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
 }
 
 .nav-bar {
@@ -19,13 +29,8 @@ ul.toc {
     font-size: 150%;
 }
 
-code {
-    font-family: consolas, monospace;
-    line-height: 130%;
-}
-
 span.Constant {
-    color: DarkGreen;
+    color: #0086b3;
 }
 
 span.Special {
@@ -33,28 +38,34 @@ span.Special {
 }
 
 span.Comment {
-    color: DarkRed;
-    font-style: italic;
+    color: #969896;
 }
 
 span.Identifier {
-    color: DarkCyan;
+    color: #199f4b;
 }
 
 span.PreProc {
     color: DarkMagenta;
 }
 
-span.Statement, span.Type, span.Keyword, span.Repeat, span.Conditional,
-    span.Operator, span.Exception
+span.Type {
+    color: #ed6a43;
+}
+
+span.Statement {
+    color: #a71d5d;
+}
+
+span.Keyword, span.Repeat, span.Conditional,
+span.Operator, span.Exception
 {
-    color: DarkBlue;
+    color: #4078c0;
 }
 
 span.Todo {
-    color: DarkRed;
-    background-color: Gold;
-    font-style: italic;
+    color: #333;
+    background-color: #f8cbcb;
 }
 
 span.Underlined {
@@ -63,6 +74,11 @@ span.Underlined {
 
 span.linkable {
     font-weight: bold;
+}
+
+code {
+    line-height: 130%;
+    font-family: monospace,Menlo,Monaco,Consolas,"Courier New";
 }
 
 code ol {
