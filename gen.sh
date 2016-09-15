@@ -14,7 +14,7 @@ ebook2pdf() {
     pdf=$2
     ebook-convert $html $pdf \
         --override-profile-size \
-        --paper-size a4 \
+        --paper-size a3 \
         --pdf-default-font-size 12 \
         --pdf-mono-font-size 12 \
         --margin-left 10 --margin-right 10 \
