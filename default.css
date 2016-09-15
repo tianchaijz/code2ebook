@@ -77,8 +77,10 @@ span.linkable {
 }
 
 code {
+    color: #333;
     line-height: 130%;
-    font-family: monospace,Menlo,Monaco,Consolas,"Courier New";
+    font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    counter-reset: item;
 }
 
 code ol {
@@ -91,14 +93,19 @@ code ol {
 
 code li {
     display: block;
+    padding-left: 60px;
+    position: relative;
 }
 
 code li:before {
-    content: counter(item) "  ";
+    content: counter(item) " ";
     counter-increment: item;
     color: #999;
+    position: absolute;
     padding-right: 0.5em;
-    padding-left: 0.4em;
+    padding-left: 0.5em;
     list-style-position: inside;
-    text-align: right
+    left: 0;
+    text-align: right;
+    width: 2%;
 }
