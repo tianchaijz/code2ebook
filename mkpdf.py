@@ -48,7 +48,11 @@ def shell(command):
 
 
 def worker(info):
-    path = os.path.join(base_path, info['path'])
+    if info['path'][0] == '$':
+        path = os.path.expandvars(info['path'])
+    else:
+        path = os.path.join(base_path, info['path'])
+
     title = info.get('title', info['path'].split('/')[-1])
     pdf_name = "%s.pdf" % title.replace('-', '_')
 
@@ -115,9 +119,16 @@ _jobs = [
 ]
 
 _jobs = [
-    {'path': "socket/muduo"},
-    {'path': "lang/lua"},
-    {'path': "cpp/leveldb"},
+    {'path': "$HOME/openresty/lua-nginx-module/src",
+     'title': "lua-nginx-module"},
+    {'path': "$HOME/source/_code/luna", 'title': "airtrack-luna"},
+    {'path': "$HOME/source/_code/memcached", 'title': "memcached"},
+    {'path': "$HOME/source/_code/leveldb", 'title': "leveldb"},
+    {'path': "$HOME/source/_code/tinypie/src", 'title': "tinypie"},
+]
+
+_jobs = [
+    {'path': "$HOME/source/_code/mread", 'title': "mread"},
 ]
 
 

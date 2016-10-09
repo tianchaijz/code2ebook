@@ -5,7 +5,7 @@ pdf_file=$2
 
 gen_ebook() {
     title=$1
-    src2html.pl --tab-width 4 --color --cross-reference \
+    src2html.pl -j 18 --tab-width 4 --color --cross-reference \
         --navigator --line-numbers . $title
 }
 
@@ -28,4 +28,10 @@ gen_ebook $title
 
 ebook2pdf html_out/index.html $pdf_file
 
+dest=$HOME/source/$title
+if [ -d $dest ]; then
+    rm -rf $dest
+fi
+
+cp -r html_out $dest
 cp $pdf_file ~/tmp/ebook/
