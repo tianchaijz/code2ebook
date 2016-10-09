@@ -3,8 +3,9 @@
 
 import os
 import sys
-from subprocess import Popen
 import psutil
+import multiprocessing
+from subprocess import Popen
 
 home_path = os.path.expanduser("~")
 base_path = os.path.join(home_path, "code")
@@ -60,7 +61,7 @@ def worker(info):
         shell("%s %s %s" % (gen_file, title, pdf_name))
 
 
-def _worker(info):
+def dummy_worker(info):
     title = info.get('title', info['path'].split('/')[-1])
     pdf_name = "%s.pdf" % title.replace('-', '_')
 
@@ -124,27 +125,20 @@ _jobs = [
     {'path': "$HOME/source/_code/luna", 'title': "airtrack-luna"},
     {'path': "$HOME/source/_code/memcached", 'title': "memcached"},
     {'path': "$HOME/source/_code/leveldb", 'title': "leveldb"},
-    {'path': "$HOME/source/_code/tinypie/src", 'title': "tinypie"},
+    {'path': "$HOME/source/_code/mread", 'title': "mread"},
 ]
 
 _jobs = [
-    {'path': "$HOME/source/_code/mread", 'title': "mread"},
+    {'path': "$HOME/source/_code/tinypie/src/tinypie", 'title': "tinypie"},
 ]
 
 
 def main():
-    import multiprocessing
-    PROCESSES = 8
-    pool = multiprocessing.Pool(processes=PROCESSES)
+    pool = multiprocessing.Pool(processes=8)
 
-    TEST = True
-    if TEST != "1":
-        TEST = False
-    if TEST:
-        pool.map(_worker, _jobs)
-        pool.close()
-        pool.join()
-    else:
+    run = True
+
+    if run:
         try:
             pool.map_async(worker, _jobs)
             pool.close()
@@ -152,6 +146,10 @@ def main():
         except KeyboardInterrupt:
             print "==== Main terminate!"
             kill(os.getpid())
+    else:
+        pool.map(dummy_worker, _jobs)
+        pool.close()
+        pool.join()
 
     print "Total %d items converted!" % len(jobs)
     shell("ls -l ~/tmp/ebook | grep rw | wc -l")
